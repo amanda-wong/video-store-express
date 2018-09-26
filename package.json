@@ -1,0 +1,17 @@
+{
+  "name": "video-store",
+  "version": "1.0.0",
+  "description": "Video Store App",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amanda Wong",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "pg-promise": "^8.4.5"
+  }
+}
