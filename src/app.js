@@ -33,7 +33,7 @@ app.get('/movies', function (req, res) {
 });
 
 app.get('/movies/search', function (req, res) {
-    var query = req.query.q;
+    var query = req.query.q.split(' ').join('|');
     movieRepository.getMoveByTitle(query,(err, data) => {
         if (err) {
             console.error("Movies response error: " + err);

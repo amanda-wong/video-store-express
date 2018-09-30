@@ -11,7 +11,7 @@ function getMovies(callback) {
 }
 
 function getMoveByTitle(query, callback){
-    db.any("select title from movie where title like '%" + query + "%'")
+    db.any("select title from movie where title similar to '%(" + query + ")%'")
         .then(function (data) {
             callback(null,data);
         })
