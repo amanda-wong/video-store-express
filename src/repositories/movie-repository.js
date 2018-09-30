@@ -10,16 +10,17 @@ function getMovies(callback) {
         })
 }
 
-// function getMoveByTitle(title){
-//     db.any("select title from movie where title = " + title)
-//         .then(function (data) {
-//             callback(null,data);
-//         })
-//         .catch(function (error) {
-//            callback(error);
-//         })
-// }
+function getMoveByTitle(query, callback){
+    db.any("select title from movie where title like '%" + query + "%'")
+        .then(function (data) {
+            callback(null,data);
+        })
+        .catch(function (error) {
+           callback(error);
+        })
+}
 
 module.exports = {
-    getMovies
+    getMovies,
+    getMoveByTitle
 }

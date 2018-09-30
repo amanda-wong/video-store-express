@@ -24,9 +24,21 @@ app.get('/genres', function (req, res) {
 app.get('/movies', function (req, res) {
     movieRepository.getMovies((err, data) => {
         if (err) {
-            console.error("Movies response error: " + error);
-            res.status(500).send({error});
+            console.error("Movies response error: " + err);
+            res.status(500).send({err});
         } else {
+            res.json(data)
+        }        
+    }); 
+});
+
+app.get('/movies/search', function (req, res) {
+    var query = req.query.q;
+    movieRepository.getMoveByTitle(query,(err, data) => {
+        if (err) {
+            console.error("Movies response error: " + err);
+            res.status(500).send({err});
+        } else {            
             res.json(data)
         }        
     }); 
