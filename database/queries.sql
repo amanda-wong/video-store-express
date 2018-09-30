@@ -12,5 +12,6 @@ WHERE movie.title = 'crazy stupid love';
 --Find movie with the title stupid love
 SELECT title
 FROM movie
-WHERE movie.title = 'crazy stupid love';
+WHERE title SIMILAR TO '%(crazy|stupid|love)%';
 
+ 
