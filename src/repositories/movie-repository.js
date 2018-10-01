@@ -20,7 +20,18 @@ function getMoveByTitle(query, callback){
         })
 }
 
+function getMoveByGenre(query, callback){
+    db.any("select movie.title from movie inner join genre on movie.genre_id = genre.id where genre = '" + query + "'")
+        .then(function (data) {
+            callback(null,data);
+        })
+        .catch(function (error) {
+           callback(error);
+        })
+}
+
 module.exports = {
     getMovies,
-    getMoveByTitle
+    getMoveByTitle,
+    getMoveByGenre
 }
