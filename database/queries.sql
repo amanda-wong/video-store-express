@@ -14,4 +14,14 @@ SELECT title
 FROM movie
 WHERE title SIMILAR TO '%(crazy|stupid|love)%';
 
+--Find movie by genre
+SELECT title
+FROM movie
+WHERE genre_id = '2';
+
+--Find movie by genre and search
+SELECT title
+FROM movie
+WHERE genre_id = '2' AND title SIMILAR TO '%(crazy|stupid|love)%';
+
  
