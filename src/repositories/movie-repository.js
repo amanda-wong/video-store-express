@@ -1,7 +1,7 @@
 const db = require('./../../database/database');
 
 function getMovies(query,genre,callback) {
-    var selectStatement = "select title from movie inner join genre on movie.genre_id = genre.id";  
+    var selectStatement = "select movie.title, year, genre.genre from movie inner join genre on movie.genre_id = genre.id";  
     
     if(query !== undefined && genre !== undefined) {
         selectStatement += ` where title similar to '%(${query})%' and genre = '${genre}'`;
