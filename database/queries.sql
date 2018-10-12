@@ -24,4 +24,8 @@ SELECT title
 FROM movie
 WHERE genre_id = '2' AND title SIMILAR TO '%(crazy|stupid|love)%';
 
+-- Get movie details by movie id
+SELECT * 
+FROM movie 
+WHERE id = 1;
  

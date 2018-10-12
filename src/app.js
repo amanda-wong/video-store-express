@@ -30,9 +30,22 @@ app.get('/movies', function (req, res) {
             console.error("Movies response error: " + err);
             res.status(500).send({err});
         } else {            
-            res.json(data)
+            res.json(data);
         }        
     }); 
+});
+
+app.get('/movie/:movie', function(req, res) {
+    var movie = req.params.movie.split('-').join(' ');
+    
+    movieRepository.getMovieDetails(movie, (err,data) => {
+        if(err) {
+            console.error("Movie details response error: " + err);
+            res.status(500).send({err});
+        } else {
+            res.json(data);
+        }
+    });
 });
 
 app.listen(8000, () => console.log('Listening on port 8000!'))
