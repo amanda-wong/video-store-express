@@ -20,6 +20,10 @@ function getMovies(query,genre,callback) {
         })
 }
 
+function getMovieDetail(param) {
+    
+}
+
 module.exports = {
     getMovies
 }
