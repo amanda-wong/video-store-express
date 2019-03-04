@@ -1,11 +1,13 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
+const bodyParser = require('body-parser');
 const genreRepository = require('./repositories/genre-repository');
 const movieRepository = require('./repositories/movie-repository');
 
 
 app.use(cors());
+app.use(bodyParser.json());
 app.get('/', function() {
     console.log('API listening');
 });
