@@ -24,12 +24,12 @@ app.get('/genres', function (req, res) {
 });
 
 app.get('/movies', function (req, res) {
-    var query = req.query.q;
-    var genre = req.query.genre;
+    const query = req.query.q;
+    const genre = req.query.genre;
 
-    movieRepository.getMovies(query,genre,(err, data) => {
+    movieRepository.getMovies(query, genre,(err, data) => {
         if (err) {
-            console.error("Movies response error: " + err);
+            console.error("[ === Get all movies response error === ]: " + err);
             res.status(500).send({err});
         } else {            
             res.json(data);
@@ -38,11 +38,17 @@ app.get('/movies', function (req, res) {
 });
 
 app.get('/movie/:movie', function(req, res) {
-    var movie = req.params.movie.split('-').join(' ');
+    const movie = req.params.movie.split('-').join(' ');
     
     movieRepository.getMovieDetails(movie, (err,data) => {
         if(err) {
-            console.error("Movie details response error: " + err);
+            console.error("[ === Get movie details response error === ]: " + err);
+            res.status(500).send({err});
+        } else {
+            res.json(data);
+        }
+    });
+});
             res.status(500).send({err});
         } else {
             res.json(data);
