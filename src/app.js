@@ -4,10 +4,10 @@ const cors = require('cors');
 const bodyParser = require('body-parser');
 const genreRepository = require('./repositories/genre-repository');
 const movieRepository = require('./repositories/movie-repository');
-
+const jsonParser = bodyParser.json();
 
 app.use(cors());
-app.use(bodyParser.json());
+
 app.get('/', function() {
     console.log('API listening');
 });
@@ -49,6 +49,19 @@ app.get('/movie/:movie', function(req, res) {
         }
     });
 });
+
+app.post('/movie', jsonParser, function(req, res) {
+    const body = req.body;
+    console.log("body ==================> ", body);
+    
+    if(!req.body) {
+        res.sendStatus(400);
+        return;
+    } 
+    
+    movieRepository.addMovie(body, (err, data) => {
+        if(err) {
+            console.error("[ === Add movie response error === ]: " + err);
             res.status(500).send({err});
         } else {
             res.json(data);
