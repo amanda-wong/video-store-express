@@ -1,22 +1,19 @@
-// const db = require('../../database/database');
+const db = require('../../database/database');
 
-// // Create new movie
-// const addMovie = (title, duration, genreId, year, rating, imgUrl, customerRating, description, callback) => {
-//     const movieInsertStatement = 
-//         `INSERT INTO movie 
-//             (title, genre_id, year, description, image_url, duration, customer_rating, rating)
-//         VALUES(${title}, ${genreId}, ${year}, ${imageUrl}, ${duration}, ${customerRating}, ${rating})`;
+// Get all actors
+const getActors = (callback) => {
+    const actorSelectStatement = 
+        `SELECT * FROM actor ORDER BY first_name ASC`;
 
-//     db.any(movieInsertStatement)
-//     .then(function (data) {
-//         callback(null,data);
-//     })
-//     .catch(function (error) {
-//         callback(error);
-//     });
-// };
+    db.any(actorSelectStatement)
+        .then(function (data) {
+            callback(null, data);
+        })
+        .catch(function (err) {
+            callback(err);
+        });
+};
 
-// module.exports = {
-//     getMovies,
-//     getMovieDetails
-// };
+module.exports = {
+    getActors
+};

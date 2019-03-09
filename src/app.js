@@ -3,6 +3,7 @@ const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const genreRepository = require('./repositories/genre-repository');
+const actorRepository = require('./repositories/actor-repository');
 const movieRepository = require('./repositories/movie-repository');
 const jsonParser = bodyParser.json();
 
@@ -15,8 +16,19 @@ app.get('/', function() {
 app.get('/genres', function (req, res) {
     genreRepository.getGenres((err, data) => {
         if (err) {
-            console.error("Genres response error: " + error);
-            res.status(500).send({error});
+            console.error("[ === Get genres response error === ]:" + err);
+            res.status(500).send({err});
+        } else {
+            res.json(data)
+        }        
+    }); 
+});
+
+app.get('/actors', function (req, res) {
+    actorRepository.getActors((err, data) => {
+        if (err) {
+            console.error("[ === Get actors response error === ]:" + err);
+            res.status(500).send({err});
         } else {
             res.json(data)
         }        
@@ -29,7 +41,7 @@ app.get('/movies', function (req, res) {
 
     movieRepository.getMovies(query, genre,(err, data) => {
         if (err) {
-            console.error("[ === Get all movies response error === ]: " + err);
+            console.error("[ === Get movies response error === ]: " + err);
             res.status(500).send({err});
         } else {            
             res.json(data);
@@ -40,7 +52,7 @@ app.get('/movies', function (req, res) {
 app.get('/movie/:movie', function(req, res) {
     const movie = req.params.movie.split('-').join(' ');
     
-    movieRepository.getMovieDetails(movie, (err,data) => {
+    movieRepository.getMovieDetails(movie, (err, data) => {
         if(err) {
             console.error("[ === Get movie details response error === ]: " + err);
             res.status(500).send({err});
@@ -59,12 +71,12 @@ app.post('/movie', jsonParser, function(req, res) {
         return;
     } 
     
-    movieRepository.addMovie(body, (err, data) => {
+    movieRepository.addMovie(body, (err) => {
         if(err) {
             console.error("[ === Add movie response error === ]: " + err);
             res.status(500).send({err});
         } else {
-            res.json(data);
+            res.sendStatus(201);
         }
     });
 });
