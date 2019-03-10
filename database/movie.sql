@@ -143,3 +143,22 @@ SET description = 'Manor we shall merit by chief wound no or would. Oh towards b
     rating = '18 A'
 WHERE id = 12;
 
+UPDATE movie 
+SET rating_id = 1
+WHERE rating = 'G';
+
+UPDATE movie 
+SET rating_id = 2
+WHERE rating = 'PG';
+
+UPDATE movie 
+SET rating_id = 3
+WHERE rating = 'PG-13' OR rating = 'PG 13';
+
+UPDATE movie 
+SET rating_id = 4
+WHERE rating = '18 A';
+
+UPDATE movie 
+SET rating_id = 5
+WHERE rating = 'R';
