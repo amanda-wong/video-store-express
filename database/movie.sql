@@ -1,7 +1,47 @@
+-- TABLE CREATION ------------------------------------------------------------------
+CREATE TABLE movie (
+    id serial PRIMARY KEY,
+    title varchar(50),
+    genre_id int,
+    FOREIGN KEY (genre_id) references genre(id)
+);
+
+-- INSERTIONS ---------------------------------------------------------------------- 
 INSERT INTO movie (title, genre_id)
 VALUES
     ('the notebook', 2),
     ('crazy stupid love', 2);
+
+INSERT INTO movie (title, genre_id, year) 
+VALUES 
+    ('pulp fiction', 8, 1994),
+    ('titanic',2,1997),
+    ('the shawshank redemption',8,1994),
+    ('forest gump',8,1994),
+    ('the godfather',11,1972),
+    ('halloween h20',4,2007),
+    ('step brothers',1,2008),
+    ('die hard',5,1988),
+    ('rambo',5,1982),
+    ('avatar',12,2009);
+
+-- ALTERATIONS ---------------------------------------------------------------------
+ALTER TABLE movie
+ADD COLUMN rating_id INT;
+
+ALTER TABLE movie
+ADD CONSTRAINT rating_id
+FOREIGN KEY (rating_id) REFERENCES rating(id);
+
+-- UPDATES --------------------------------------------------------------------------
+UPDATE movie 
+SET description = 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, 
+                litot Europa usa li sam vocabular. Li lingues differe solmen in li grammatica, li pronunciation e li plu commun',
+    image_url = 'https://imgplaceholder.com/420x320/cccccc/757575/glyphicon-star',
+    duration = 152, 
+    customer_rating = 7.5,
+    rating = 'PG 13'
+WHERE id = 2;
 
 UPDATE movie 
  set description = 'Mocking is essentially simulating the behaviour of real data in controlled ways. So in order to use mock data effectively, 
@@ -11,7 +51,6 @@ UPDATE movie
     customer_rating = 4.5,
     rating = 'PG'
 WHERE id = 1;
-
 
 UPDATE movie 
 SET description = 'Li Europan lingues es membres del sam familie. Lor separat existentie es un myth. Por scientie, musica, sport etc, 
@@ -103,14 +142,4 @@ SET description = 'Manor we shall merit by chief wound no or would. Oh towards b
     customer_rating = 9.0,
     rating = '18 A'
 WHERE id = 12;
-
-
-
-
-
-
-
-
-
-
 
