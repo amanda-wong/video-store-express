@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const genreRepository = require('./repositories/genre-repository');
 const actorRepository = require('./repositories/actor-repository');
 const movieRepository = require('./repositories/movie-repository');
+const ratingRepository = require('./repositories/rating-repository');
 const jsonParser = bodyParser.json();
 
 app.use(cors());
@@ -17,6 +18,17 @@ app.get('/genres', function (req, res) {
     genreRepository.getGenres((err, data) => {
         if (err) {
             console.error("[ === Get genres response error === ]:" + err);
+            res.status(500).send({err});
+        } else {
+            res.json(data)
+        }        
+    }); 
+});
+
+app.get('/ratings', function (req, res) {
+    ratingRepository.getRatings((err, data) => {
+        if (err) {
+            console.error("[ === Get rating response error === ]:" + err);
             res.status(500).send({err});
         } else {
             res.json(data)
