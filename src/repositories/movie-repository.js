@@ -38,14 +38,14 @@ const getMovieDetails = (title, callback) => {
 };
 
 // Create new movie
-const addMovie = ({title, duration, genreId, year, rating, imageUrl, customerRating, description, actors}, callback) => {
+const addMovie = ({title, duration, genreId, year, ratingId, imageUrl, customerRating, description, actors}, callback) => {
     let movieInsertStatement = 
         `INSERT INTO movie 
-            (title, genre_id, year, description, image_url, duration, customer_rating, rating)
+            (title, genre_id, year, description, image_url, duration, customer_rating, rating_id)
         VALUES(
             '${title}', ${genreId}, ${year}, 
             '${description}', '${imageUrl}',
-            ${duration}, ${customerRating}, '${rating}') `;
+            ${duration}, ${customerRating}, ${ratingId}) `;
     
     if (actors && actors.length) {
         movieInsertStatement += "RETURNING id";
