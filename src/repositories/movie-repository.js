@@ -56,8 +56,6 @@ const addMovie = ({title, duration, genreId, year, ratingId, imageUrl, customerR
             const movieId = data[0].id;
             const actorInsertStatement = `INSERT`
             db.any(actorInsertStatement)
-
-
         })
         .catch(function (error) {
             callback(error);

@@ -15,10 +15,10 @@ app.get('/', function() {
 });
 
 app.get('/genres', function (req, res) {
-    genreRepository.getGenres((err, data) => {
-        if (err) {
-            console.error("[ === Get genres response error === ]:" + err);
-            res.status(500).send({err});
+    genreRepository.getGenres((error, data) => {
+        if (error) {
+            console.error("[ === Get genres response error === ]:" + error);
+            res.status(500).send({error});
         } else {
             res.json(data)
         }        
@@ -26,10 +26,10 @@ app.get('/genres', function (req, res) {
 });
 
 app.get('/ratings', function (req, res) {
-    ratingRepository.getRatings((err, data) => {
-        if (err) {
-            console.error("[ === Get rating response error === ]:" + err);
-            res.status(500).send({err});
+    ratingRepository.getRatings((error, data) => {
+        if (error) {
+            console.error("[ === Get rating response error === ]:" + error);
+            res.status(500).send({error});
         } else {
             res.json(data)
         }        
@@ -37,10 +37,10 @@ app.get('/ratings', function (req, res) {
 });
 
 app.get('/actors', function (req, res) {
-    actorRepository.getActors((err, data) => {
-        if (err) {
-            console.error("[ === Get actors response error === ]:" + err);
-            res.status(500).send({err});
+    actorRepository.getActors((error, data) => {
+        if (error) {
+            console.error("[ === Get actors response error === ]:" + error);
+            res.status(500).send({error});
         } else {
             res.json(data)
         }        
@@ -51,10 +51,10 @@ app.get('/movies', function (req, res) {
     const query = req.query.q;
     const genre = req.query.genre;
 
-    movieRepository.getMovies(query, genre,(err, data) => {
-        if (err) {
-            console.error("[ === Get movies response error === ]: " + err);
-            res.status(500).send({err});
+    movieRepository.getMovies(query, genre,(error, data) => {
+        if (error) {
+            console.error("[ === Get movies response error === ]: " + error);
+            res.status(500).send({error});
         } else {            
             res.json(data);
         }        
@@ -64,10 +64,10 @@ app.get('/movies', function (req, res) {
 app.get('/movie/:movie', function(req, res) {
     const movie = req.params.movie.split('-').join(' ');
     
-    movieRepository.getMovieDetails(movie, (err, data) => {
-        if(err) {
-            console.error("[ === Get movie details response error === ]: " + err);
-            res.status(500).send({err});
+    movieRepository.getMovieDetails(movie, (error, data) => {
+        if(error) {
+            console.error("[ === Get movie details response error === ]: " + error);
+            res.status(500).send({error});
         } else {
             res.json(data);
         }
@@ -83,10 +83,10 @@ app.post('/movie', jsonParser, function(req, res) {
         return;
     } 
     
-    movieRepository.addMovie(body, (err) => {
-        if(err) {
-            console.error("[ === Add movie response error === ]: " + err);
-            res.status(500).send({err});
+    movieRepository.addMovie(body, (error, data) => { // TODO: not sure why but it enters err on success
+        if(error) {
+            console.error("[ === Add movie response error === ]: " + error);
+            res.status(500).send({error});
         } else {
             res.sendStatus(201);
         }
