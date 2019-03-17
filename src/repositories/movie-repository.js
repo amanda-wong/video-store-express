@@ -64,12 +64,10 @@ const addMovie = ({title, duration, genreId, year, rating, imageUrl, customerRat
         });
     } else {
 
-        console.log("Added movie with out actor");
-        
+        console.log("==================== Added movie with out actor ===================");
         db.any(movieInsertStatement)
-            .then(function (data) {
-                console.log("data after insert statement:", data);
-                callback(data);
+            .then(function () {
+                callback();
             })
             .catch(function (error) {
                 callback(error);
