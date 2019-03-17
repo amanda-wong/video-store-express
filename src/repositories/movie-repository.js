@@ -5,7 +5,7 @@ const getMovies = (query,genre,callback) => {
     let selectStatement = 
         `SELECT movie.title, year, genre.genre 
         FROM movie inner 
-        JOIN genre ON movie.genre_id = genre.id`;  
+        JOIN genre ON movie.genre_id = genre.id ORDER BY title ASC`;  
     
     if (query !== undefined && genre !== undefined) {
         selectStatement += ` WHERE title SIMILAR to '%(${query})%' AND genre = '${genre}'`;
@@ -75,8 +75,6 @@ const addMovie = ({title, duration, genreId, year, ratingId, imageUrl, customerR
     }
 
     console.log("movieInsertStatement: ==========>", movieInsertStatement);
-    
-    
 };
 
 module.exports = {
